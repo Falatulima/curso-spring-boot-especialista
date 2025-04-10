@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: libraryapi
+  datasource:
+    url: jdbc:postgresql://localhost:5432/library
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  #para gerar tabelas no banco a partir da execução do código
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
