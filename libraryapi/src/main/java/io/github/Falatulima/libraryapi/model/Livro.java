@@ -10,12 +10,27 @@ import java.util.UUID;
 @Entity //"Ei Spring, essa classe aqui vira uma tabela no banco de dados!"
 @Table(name = "livro", schema = "public")
 @Data
+@ToString(exclude = "autorID")
 //Data engloba as seguintes anotações:
 //@Getter @Setter
 //@ToString
 //@EqualsAndHashCode
 //@RequiredArgsConstructor
 public class Livro {
+
+/*    @Override
+    public String toString() {
+        return "Livro{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", dataPublicacao=" + dataPublicacao +
+                ", genero=" + genero +
+                ", valor=" + valor +
+                //operador ternário: condição ? valorSeVerdadeiro : valorSeFalso
+                ", autor=" + (autorID != null ? autorID.getNome() : "null") +
+                '}';
+    }*/
 
     @Id
     @Column(name = "id")
@@ -38,8 +53,11 @@ public class Livro {
     @Column(name = "valor", precision = 18, scale = 2)
     private BigDecimal valor;
 
-    @ManyToOne
+    @ManyToOne(
+            //cascade = CascadeType.ALL,
+            //fetch = FetchType.EAGER //Para trazer os dados da tabela e realizar um inner nas tabelas vinculadas, no caso os dados do autor.
+            fetch = FetchType.LAZY //Para trazer apenas os dados da tebela livro.
+    )
     @JoinColumn(name = "id_autor")
     private Autor autorID;
-
 }

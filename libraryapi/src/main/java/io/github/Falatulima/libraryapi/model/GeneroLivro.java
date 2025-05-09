@@ -7,5 +7,6 @@ public enum GeneroLivro {
     MISTERIO,
     ROMANCE,
     BIOGRAFICO,
-    CIENCIA
+    CIENCIA,
+    REFERENCIA
 }
